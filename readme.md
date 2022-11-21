@@ -30,9 +30,7 @@ Really don’t know what this table means, but it mentions a lot of variants of 
 
 ![Untitled](images/Untitled%202.png)
 
-| Mode 0
-Pin Number | Mode 1
-Pin Number | Pin Name | Description |
+| Mode 0 Pin Number | Mode 1 Pin Number | Pin Name | Description |
 | --- | --- | --- | --- |
 | 1 | 1 | VDD3_0 |  |
 | 2 | 2 | VDD2_0 |  |
