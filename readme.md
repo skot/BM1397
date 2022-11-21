@@ -82,3 +82,8 @@ Really don’t know what this table means, but it mentions a lot of variants of 
 ## Thermal
 
 ## Circuit Examples
+
+## References
+- [ZeusBTC Antminer S17 Repair Guide](https://www.zeusbtc.com/manuals/Antminer-S17-Hash-Board-Repair-Guide.asp)
+- [Another slightly different S17 Repair Guide](https://www.zeusbtc.com/articles/information/170-antminer-s17-manual-download)
+- [Antminer 17 Series Chip Replacement Guide](https://d-central.tech/bm1397-ad-ag-ah-ai-antminer-17-series-chip-replacement-guide/)
