@@ -294,3 +294,95 @@ ID = 6
 ID = 7
 
 ![](images/sweep_clock_control.svg)
+
+# Protocol
+NRSTI (**N**egated **R**e**S**e**T** **I**nput) does a hardware reset on BM1397 when signal is Low.
+
+CLKI (**CL**oc**K** **I**nput) pin must have a 25MHz clock signal, it will be propagated to the CLKO (**CL**oc**K** **O**utput) pin.
+
+BI (**B**usy **I**nput) signal must be pulled-down in order to let the BM1397 communicate.
+
+Communication with BM1397 is done by UART on its CI (**C**command **I**nput) pin and RO (**R**esponse **O**utput). Default baudrate is 115200 bps. UART has 8 bits of data, no parity, 1 stop bit (usually represented as 115200 8N1).
+## Command
+![](images/command.svg)
+### Preamble
+All command have a fixed 2 bytes preamble: 0x55 0xAA
+### TYPE
+* TYPE = 1: send Job
+* TYPE = 2: send Command
+### ALL
+* ALL = 0: send to a single Chip
+* ALL = 1: send to all Chips on the Chain
+### CMD
+if TYPE == 1:
+* CMD = 1: send Job
+
+if TYPE == 2:
+* CMD = 0: set Chip Address
+* CMD = 1: write Register
+* CMD = 2: read Register
+* CMD = 3: chain Inactive
+### Frame Lenght
+Total Frame Lenght excluding preamble.
+### Data
+Depend on TYPE/CMD, see detailed frames below.
+### CRC
+Can be CRC5 or CRC16 depending on TYPE/CMD, see detailled frames below.
+## Response
+![](images/response.svg)
+
+All Responses have fixed lenght : 9 bytes.
+### Preamble
+All command have a fixed 2 bytes preamble: 0xAA 0x55
+### TYPE
+* TYPE = 0: respond to a command
+* TYPE = 4: respond to a job (nonce)
+### Data
+Depends on TYPE, see detailed frames below.
+### CRC5
+CRC 5 bits with polynomial 0x05, intial value 0x1F, no reflection, no final XOR of the full Frame excluding preamble.
+## Set Chip Address
+On reset all chip have a logical address of 0. In order to access to a specific chip later, we must give them different address.
+
+Warning : Chip Address are different to Chip index on the chain. IT is a logical concept configurable by software.
+
+To set Chip Address of all chip one by one, we must not send command to ALL chip, just to the chip with Address = 0, so the first chip on the chain will get the command and not propagate it downward.
+
+The Set Chip Address Command format is:
+
+![](images/set_chip_address.svg)
+
+No Response is replied by the chip.
+## Write Register
+The Write Register Command format is:
+
+![](images/write_register.svg)
+
+No Response is replied by the chip.
+## Read Register
+The Read Register Command format is:
+
+![](images/read_register.svg)
+
+The Register Value Response format is:
+
+![](images/register_value.svg)
+
+Sending a Read Register Command to ALL chips on the chain is very usefull to enumerate them (usually with the [Chip Address](#chip-address) register), every chip on the chain will send a Response that will be propagated upward.
+
+Warning: sometime a register value can be sent sponteanously by a chip (usually the [Core Register Value](#core-register-value) register).
+## Chain Inactive
+The Chain Inactive Command format is:
+
+![](images/chain_inactive.svg)
+
+No Response is replied by the chip.
+## Send Job
+The Send Job Command format is:
+
+![](images/send_job.svg)
+
+## Nonce
+Once hashing, when a nonce is found by a chip on the chain, it is sent on the RO pin (and propagated upward) with this format:
+
+![](images/nonce.svg)

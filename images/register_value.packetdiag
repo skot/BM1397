@@ -1,0 +1,9 @@
+packetdiag {
+  0-7: 0x00;
+  8-15: 0x55;
+  16-31: Register Value [colheight = 2];
+  48-55: Chip Address;
+  56-63: Register Address;
+  64-66: 0;
+  67-71:CRC5;
+}
