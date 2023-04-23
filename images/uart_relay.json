@@ -1,0 +1,6 @@
+[
+  { "name": "CO_REL_EN", "bits": 1, "rotate": -45 },
+  { "name": "RO_REL_EN", "bits": 1, "rotate": -45 },
+  {                      "bits": 14 },
+  { "name": "GAP_CNT",   "bits": 16 }
+]

@@ -1,0 +1,4 @@
+[
+  { "name": "CLOCK_CTRL", "bits": 8 },
+  {                       "bits": 8 }
+]

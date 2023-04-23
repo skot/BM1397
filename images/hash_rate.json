@@ -1,0 +1,4 @@
+[
+  { "name": "HASHRATE",  "bits": 31 },
+  { "name": "LONG",      "bits":  1 }
+]

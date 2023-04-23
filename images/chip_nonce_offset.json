@@ -1,0 +1,5 @@
+[
+  { "name": "CNO",  "bits":  3 },
+  {                 "bits":  28 },
+  { "name": "CNOV", "bits":  1 }
+]

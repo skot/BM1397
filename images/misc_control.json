@@ -1,0 +1,19 @@
+[
+  { "name": "HASHRATE_TWS",      "bits": 2 , "rotate": -25 },
+  {                              "bits": 2 },
+  { "name": "TFS",               "bits": 3 },
+  { "name": "RET_WORK_ERR_FLAG", "bits": 1 , "rotate": -45 },
+  { "name": "BT8D_4_0",          "bits": 5 },
+  { "name": "INV_CLKO",          "bits": 1 , "rotate": -45 },
+  { "name": "RFS",               "bits": 1 },
+  { "name": "RET_ERR_NONCE",     "bits": 1 , "rotate": -45 },
+  { "name": "BCLK_SEL",          "bits": 1 , "rotate": -45 },
+  { "name": "TOP_CLK_SEL",       "bits": 1 , "rotate": -45 },
+  { "name": "DSCLK_SEL",         "bits": 2 },
+  { "name": "RVS_K0",            "bits": 1 , "rotate": -45 },
+  { "name": "SPAT_NOD",          "bits": 1 , "rotate": -45 },
+  { "name": "CORE_SRST",         "bits": 1 , "rotate": -45 },
+  {                              "bits": 1 },
+  { "name": "BT8D_8_5",          "bits": 4 },
+  {                              "bits": 9 }
+]

@@ -1,0 +1,13 @@
+[
+  { "name": "CO_DS",     "bits": 4 },
+  { "name": "BO_DS",     "bits": 4 },
+  { "name": "NRSTO_DS",  "bits": 4 },
+  { "name": "CLKO_DS",   "bits": 4 },
+  { "name": "R0_DS",     "bits": 4 },
+  { "name": "D0RS_EN",   "bits": 1, "rotate": -45 },
+  { "name": "D1RS_DISA", "bits": 1, "rotate": -45 },
+  { "name": "D2RS_DISA", "bits": 1, "rotate": -45 },
+  { "name": "D3RS_DISA", "bits": 1, "rotate": -45 },
+  { "name": "RF_DS",     "bits": 4 },
+  {                      "bits": 4 }
+]
