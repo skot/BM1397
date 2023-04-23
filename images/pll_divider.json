@@ -1,0 +1,10 @@
+[
+  { "name": "PLLDIV0", "bits": 4 },
+  {                    "bits": 4 },
+  { "name": "PLLDIV1", "bits": 4 },
+  {                    "bits": 4 },
+  { "name": "PLLDIV2", "bits": 4 },
+  {                    "bits": 4 },
+  { "name": "PLLDIV3", "bits": 4 },
+  {                    "bits": 4 }
+]

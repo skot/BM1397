@@ -1,0 +1,4 @@
+[
+  { "name": "CORE_REG_VAL", "bits": 16 },
+  { "name": "CORE_ID",      "bits": 16 }
+]

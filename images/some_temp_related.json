@@ -1,0 +1,9 @@
+[
+  { "name": "TEMP_SENSOR_TYPE", "bits": 8 },
+  { "name": "SOME_TEMP_RELATED", "bits": 8 },
+  { "name": "??",   "bits": 1 },
+  { "name": "??",   "bits": 7 },
+  { "name": "??",   "bits": 1 },
+  { "name": "??",   "bits": 6 },
+  { "name": "??",   "bits": 1 }
+]

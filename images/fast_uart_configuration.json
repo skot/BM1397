@@ -1,0 +1,12 @@
+[
+  { "name": "CLKO_DIV",    "bits": 8 },
+  {                        "bits": 4 },
+  { "name": "CLKO_ODDSET", "bits": 2 },
+  { "name": "CLKO_SEL",    "bits": 1 , "rotate": -45 },
+  { "name": "ForceCoreEn", "bits": 1 , "rotate": -45 },
+  { "name": "USRC_DIV",    "bits": 6 },
+  { "name": "USRC_ODDSET", "bits": 2 },
+  { "name": "PLL3_DIV4",   "bits": 4 },
+  {                        "bits": 2 },
+  { "name": "DIV4_ODDSET", "bits": 2 }
+]

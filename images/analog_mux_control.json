@@ -1,0 +1,4 @@
+[
+  { "name": "DIODE_VDD_MUX_SEL", "bits": 3 },
+  {                              "bits": 29 }
+]

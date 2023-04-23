@@ -1,0 +1,10 @@
+[
+  { "name": "CLK_SEL0", "bits": 4 },
+  { "name": "CLK_SEL1", "bits": 4 },
+  { "name": "CLK_SEL2", "bits": 4 },
+  { "name": "CLK_SEL3", "bits": 4 },
+  { "name": "CLK_SEL4", "bits": 4 },
+  { "name": "CLK_SEL5", "bits": 4 },
+  { "name": "CLK_SEL6", "bits": 4 },
+  { "name": "CLK_SEL7", "bits": 4 }
+]

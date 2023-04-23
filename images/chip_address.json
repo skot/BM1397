@@ -1,0 +1,5 @@
+[
+  { "name": "ADDR",      "bits":  8, "attr": "RO" },
+  { "name": "CORE_NUM",  "bits":  8, "attr": "RO" },
+  { "name": "CHIP_ID",   "bits": 16, "attr": "RO" }
+]

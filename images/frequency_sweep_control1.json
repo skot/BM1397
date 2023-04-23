@@ -1,0 +1,17 @@
+[
+  { "name": "SWP_EN",             "bits": 1, "rotate": -45 },
+  { "name": "SWP_TRIG",           "bits": 1, "rotate": -45 },
+  { "name": "SWP_ONGOING",        "bits": 1, "rotate": -45 },
+  { "name": "SWP_DONE_ALL",       "bits": 1, "rotate": -45 },
+  { "name": "SWP_PAD_ADDR",       "bits": 3 },
+  { "name": "SWP_ONE_PAT_DONE",   "bits": 1, "rotate": -90 },
+  { "name": "CURR_PAT_ADDR",      "bits": 3 },
+  { "name": "SWEEP_RESET",        "bits": 1, "rotate": -90 },
+  { "name": "SWEEP_FAIL_LOCK_EN", "bits": 1, "rotate": -90 },
+  { "name": "ALL_CORE_CLK_SEL_CHANGE_ST", "bits": 1, "rotate": -45 },
+  {                               "bits": 2 },
+  { "name": "SWEEP_ST_ADDR",      "bits": 5 },
+  {                               "bits": 3 },
+  { "name": "SWEEP_STATE",        "bits": 3 },
+  {                               "bits": 5 }
+]
