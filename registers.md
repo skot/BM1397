@@ -114,6 +114,13 @@ Reset value = 0x??
 ![](images/core_register_control.svg)
 
 Reverse engineering on this register is still ongoing.
+### WR_RD#
+* WR_RD# = 0: Read operation on Core Register. [CORE_REG_VAL](#core_reg_val) must be = 0xFF.
+* WR_RD# = 1: Write operation on Core Register. [CORE_REG_VAL](#core_reg_val) must contain the value we want to write into the Core Register.
+### CORE_REG_ID
+Identifier of the Core Register.
+### CORE_REG_VAL
+Value of the Core Register with ID = [CORE_REG_ID](#core_reg_id)
 ## Core Register Value
 Address = 0x40
 
@@ -364,13 +371,13 @@ The Read Register Command format is:
 
 ![](images/read_register.svg)
 
+Sending a Read Register Command to ALL chips on the chain is very usefull to enumerate them (usually with the [Chip Address](#chip-address) register), every chip on the chain will send a Response that will be propagated upward.
+## Register Value
 The Register Value Response format is:
 
 ![](images/register_value.svg)
 
-Sending a Read Register Command to ALL chips on the chain is very usefull to enumerate them (usually with the [Chip Address](#chip-address) register), every chip on the chain will send a Response that will be propagated upward.
-
-Warning: sometime a register value can be sent sponteanously by a chip (usually the [Core Register Value](#core-register-value) register).
+Warning: sometime a Register Value can be sent sponteanously by a chip (usually the [Core Register Value](#core-register-value) register).
 ## Chain Inactive
 The Chain Inactive Command format is:
 
@@ -381,8 +388,48 @@ No Response is replied by the chip.
 The Send Job Command format is:
 
 ![](images/send_job.svg)
-
 ## Nonce
 Once hashing, when a nonce is found by a chip on the chain, it is sent on the RO pin (and propagated upward) with this format:
 
 ![](images/nonce.svg)
+## Write Core Register
+In order to write value to a Core Register, a [Write Register](#write-register) Command shall be done to the [Core Register Control](#core-register-control) Register with the [RD_WR#](#wr_rd) fields = 1.
+## Read Core Register
+In order to read the value of a Core Register, a [Write Register](#write-register) Command shall be done to the [Core Register Control](#core-register-control) Register with the [RD_WR#](#wr_rd) fields = 0.
+
+Then the chip will reply a [Register Value](#register-value) Response for the [Core Register Value](#core-register-value) Register.
+## Enumerate Chips on the Chain
+On original Firmware of the ControlBoard, an enumeration of all chips on the chain (physically on a HashBoard) is done at the begining. It is a [Read Register](#read-register) Command on [Chip Address](#chip-address) Register with [ALL](#all) = 1. Then all chips on the chain reply a [Register Value](#register-value) Response.
+
+During this enumeration, we see that all chips on the chain have a [CHIP_ADDR](#chip-address) = 0. So the FW affect new Chip Address using the [Set Chip Address](#set-chip-address) Command, and sometimes also perform a [Write Regsiter](#write-register) Command to [Chip Address](#chip-address) Register with the wanted [CHIP_ADDR](#chip-address) (seen on S9k original FW).
+
+The [CHIP_ADDR](#chip-address) given don't have to be contiguous on a chain, for instance they are given with increment of 8 on T17 original FW (4 on S9k original FW).
+## Set Baudrate
+In order to get higher HashRate, we need to increase the communication Baudrate because at 115200bps (default baudrate) a [Send Job](#send-job) Command with 4 midstate would take 15.2ms which could be longer than the time the full chain would take to Hash the complete Nonce space of the previous job.
+
+BaudRate = fBase / ((BT8D + 1) * 8)
+
+At chip reset, in [Misc Control](#misc-control) Register :
+* [BCLK_SEL](#bclk_sel) = 0
+
+fBase = fCLKI = 25MHz.
+
+* [BT8D](#bt8d) = 26 (0x1A)
+
+So the default BaudRate = fCLKI / ((BT8D + 1) * 8) = 115740 bps with reset values (0.47% error with target 115200 bps).
+
+This is possible up to 3.125Mbps BaudRate with [BT8D](#bt8d) = 0.
+
+For higher BaudRate, here are the necessary steps (numeric example below is for 6.25 Mbps BaudRate):
+1. enabling and configuring PLL3 using [PLL3 Parameter](#pll3-parameter) for example writting 0xC0700111 will result of a PLL3 with frequency equal to :
+
+fPLL3 = fCLKI * FBDIV / (REFDIV * POSTDIV1 * POSTDIV2) = 25MHz * 112 / (1 * 1 * 1) = 2.8 GHz
+
+2. setting [PLL3_DIV4](#pll3_div4) in [Fast UART Configuration](#fast-uart-configuration) for example writting 0x0600000F give a PLL3_DIV4 = 6
+3. setting [BCLK_SEL](#bclk_sel) to 1
+
+fBase = fPLL3 / (PLL3_DIV4 + 1) = 2.8 GHz / (6 + 1) = 400 MHz
+
+4. setting [BT8D](#bt8d) to 7
+
+BaudRate = fBase / ((BT8D + 1) * 8) = 400 MHz / ((7 + 1) * 8) = 6.25 MBps
