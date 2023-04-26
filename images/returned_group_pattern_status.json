@@ -1,3 +1,10 @@
 [
-  { "name": "RGPS", "bits": 32 }
+  { "name": "RGPS0", "bits": 4 },
+  { "name": "Always3?", "bits": 4, "attr": "RO" },
+  { "name": "RGPS1", "bits": 4 },
+  { "name": "Always3?", "bits": 4, "attr": "RO" },
+  { "name": "RGPS2", "bits": 4 },
+  { "name": "Always3?", "bits": 4, "attr": "RO" },
+  { "name": "RGPS3", "bits": 4 },
+  { "name": "Always3?", "bits": 4, "attr": "RO" }
 ]

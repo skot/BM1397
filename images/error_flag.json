@@ -1,6 +1,6 @@
 [
-  { "name": "CORE_RESP_ERR", "bits": 8 },
+  { "name": "CORE_RESP_ERR", "bits": 8, "attr": "RO" },
   {                          "bits": 8 },
-  { "name": "WORK_ERR_CNT",  "bits": 8 },
-  { "name": "CMD_ERR_CNT",   "bits": 8 }
+  { "name": "WORK_ERR_CNT",  "bits": 8, "attr": "RO" },
+  { "name": "CMD_ERR_CNT",   "bits": 8, "attr": "RO" }
 ]

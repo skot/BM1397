@@ -1,7 +1,7 @@
 [
-  { "name": "CLK_COUNT", "bits": 16 },
+  { "name": "CLK_COUNT", "bits": 16, "attr": "RO" },
   {                      "bits": 8 },
   { "name": "CLK_SEL",   "bits": 4 },
   {                      "bits": 3 },
-  { "name": "START",     "bits": 1 }
+  { "name": "START",     "bits": 1, "attr": "RO" }
 ]
