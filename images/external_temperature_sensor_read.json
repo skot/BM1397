@@ -1,6 +1,6 @@
 [
   { "name": "EXTERNAL_TEMP_DATA", "bits": 8 },
-  { "name": "EXTERNAL_TEMP_ADDR", "bits": 8 },
+  { "name": "EXTERNAL_TEMP_ADDR", "bits": 8, "attr": "RO" },
   { "name": "LOCAL_TEMP_DATA",    "bits": 8 },
-  { "name": "LOCAL_TEMP_ADDR",    "bits": 8 }
+  { "name": "LOCAL_TEMP_ADDR",    "bits": 8, "attr": "RO" }
 ]

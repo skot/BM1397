@@ -1,6 +1,6 @@
 [
-  { "name": "TM0",  "bits":  8 },
-  { "name": "TM1",  "bits":  8 },
-  { "name": "TM2",  "bits":  8 },
-  { "name": "TM3",  "bits":  8 }
+  { "name": "TM0", "bits": 8 },
+  { "name": "TM1", "bits": 8 },
+  { "name": "TM2", "bits": 8 },
+  { "name": "TM3", "bits": 8 }
 ]

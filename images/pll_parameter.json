@@ -1,12 +1,12 @@
 [
-  { "name": "POSTDIV2",  "bits": 3 },
-  {                      "bits": 1 },
-  { "name": "POSTDIV1",  "bits": 3 },
-  {                      "bits": 1 },
-  { "name": "REFDIV",    "bits": 6 },
-  {                      "bits": 2 },
-  { "name": "FBDIV",     "bits": 12 },
-  {                      "bits": 2 },
-  { "name": "PLLEN",     "bits": 1 , "rotate": -90 },
-  { "name": "LOCKED",    "bits": 1 , "rotate": -90 }
+  { "name": "POSTDIV2", "bits": 3 },
+  {                     "bits": 1 },
+  { "name": "POSTDIV1", "bits": 3 },
+  {                     "bits": 1 },
+  { "name": "REFDIV",   "bits": 6 },
+  {                     "bits": 2 },
+  { "name": "FBDIV",    "bits": 12 },
+  {                     "bits": 2 },
+  { "name": "PLLEN",    "bits": 1, "rotate": -90 },
+  { "name": "LOCKED",   "bits": 1, "rotate": -90 }
 ]

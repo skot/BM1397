@@ -1,4 +1,4 @@
 [
-  { "name": "HASHRATE",  "bits": 31 },
+  { "name": "HASHRATE",  "bits": 31, "attr": "RO" },
   { "name": "LONG",      "bits":  1 }
 ]
