@@ -1,3 +1,3 @@
 [
-  { "name": "ERR_CNT",   "bits": 32 }
+  { "name": "ERR_CNT", "bits": 32, "attr": "RO" }
 ]

@@ -1,4 +1,4 @@
 [
-  { "name": "CLKEN", "bits":  16 },
-  {                  "bits":  16 }
+  { "name": "CLKEN", "bits": 16 },
+  {                  "bits": 16 }
 ]
