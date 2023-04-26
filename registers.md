@@ -318,7 +318,7 @@ Communication with BM1397 is done by UART on its CI (**C**command **I**nput) pin
 ## Command
 ![](images/command.svg)
 ### Preamble
-All command have a fixed 2 bytes preamble: 0x55 0xAA
+All commands have a fixed 2 byte preamble: 0x55 0xAA
 ### TYPE
 * TYPE = 1: send Job
 * TYPE = 2: send Command
@@ -337,7 +337,7 @@ if TYPE == 2:
 ### Frame Length
 Total Frame Length excluding preamble.
 ### Data
-Depend on TYPE/CMD, see detailed frames below.
+Depends on TYPE/CMD, see detailed frames below.
 ### CRC
 Can be CRC5 or CRC16 depending on TYPE/CMD, see detailed frames below.
 ## Response
@@ -356,21 +356,21 @@ CRC 5 bits with polynomial 0x05, initial value 0x1F, no reflection, no final XOR
 ## Set Chip Address
 On reset, all chips have a logical address of 0. In order to access to a specific chip later, we must give them different addresses.
 
-Warning : Chip Address are different to Chip index on the chain. It is a logical concept configurable by software.
+**Warning**: Chip *addresses* are different from the chip *index* on the chain. It is a logical concept configurable by software.
 
-To set Chip Address of all chips one by one, we must not send commands to ALL chips, just to the chip with Address = 0, so the first chip on the chain will get the command and not propagate it downward.
+To set Chip Address of all chips one by one, we **must not** send commands to ALL chips, just to the chip with Address = 0, so the first chip on the chain will get the command and not propagate it downward.
 
 The Set Chip Address Command format is:
 
 ![](images/set_chip_address.svg)
 
-No Response is replied by the chip.
+No Response is returned by the chip.
 ## Write Register
 The Write Register Command format is:
 
 ![](images/write_register.svg)
 
-No Response is replied by the chip.
+No response is returned by the chip.
 ## Read Register
 The Read Register Command format is:
 
@@ -382,13 +382,13 @@ The Register Value Response format is:
 
 ![](images/register_value.svg)
 
-Warning: sometime a Register Value can be sent spontaneously by a chip (usually the [Core Register Value](#core-register-value) register).
+Warning: sometimes a Register Value can be sent spontaneously by a chip (usually the [Core Register Value](#core-register-value) register).
 ## Chain Inactive
 The Chain Inactive Command format is:
 
 ![](images/chain_inactive.svg)
 
-No Response is returned by the chip.
+No response is returned by the chip.
 ## Send Job
 The Send Job Command format is:
 
