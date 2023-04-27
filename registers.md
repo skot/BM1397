@@ -1,6 +1,6 @@
 # Prelude
 
-Many registers described hereunder are common with other BM13xx chips. Here we focus mainly on BM1397 as this registers map has been reverse engineered from the 'bmminer' of T17 original Firmware from Antminer.
+Many registers described below are common with other BM13xx chips. Here we focus mainly on BM1397 as this register map has been reverse engineered from the 'bmminer' of T17 original Firmware from Antminer.
 
 # Full process step by step
 
@@ -80,8 +80,9 @@ Reset value = 0x00003A01
 
 ![](images/misc_control.svg)
 ### BT8D
-It is a 9bits divider to determine actual Baudrate. It is composed by BT8D_8_5 and BT8D_4_0.
+It is a 9-bit divider to determine actual Baudrate. It is composed by BT8D_8_5 and BT8D_4_0.
 ### BCLK_SEL
+<!-- cspell:disable-next-line -->
 **B**audrate **CL**oc**K** **SEL**ect
 * BCLK_SEL = 0: Baudrate base clock is CLKI (external clock)
 * BCLK_SEL = 1: Baudrate base clock is PLL3
@@ -176,7 +177,7 @@ Address = 0x54
 Reset value = 0x00000000
 
 ![](images/analog_mux_control.svg)
-## Io Driver Strenght Configuration
+## Io Driver Strength Configuration
 Address = 0x58
 
 Reset value = 0x02112111
@@ -212,25 +213,25 @@ Address = 0x6C
 Reset value = 0x00000000
 
 ![](images/ordered_clock_monitor.svg)
-## Pll0 Divider
+## PLL0 Divider
 Address = 0x70
 
 Reset value = 0x03040607
 
 ![](images/pll_divider.svg)
-## Pll1 Divider
+## PLL1 Divider
 Address = 0x74
 
 Reset value = 0x03040506
 
 ![](images/pll_divider.svg)
-## Pll2 Divider
+## PLL2 Divider
 Address = 0x78
 
 Reset value = 0x03040506
 
 ![](images/pll_divider.svg)
-## Pll3 Divider
+## PLL3 Divider
 Address = 0x7C
 
 Reset value = 0x03040506
@@ -323,17 +324,21 @@ ID = 7
 ![](images/sweep_clock_control.svg)
 
 # Protocol
+<!-- cspell:disable-next-line -->
 NRSTI (**N**egated **R**e**S**e**T** **I**nput) does a hardware reset on BM1397 when signal is Low.
 
+<!-- cspell:disable-next-line -->
 CLKI (**CL**oc**K** **I**nput) pin must have a 25MHz clock signal, it will be propagated to the CLKO (**CL**oc**K** **O**utput) pin.
 
+<!-- cspell:disable-next-line -->
 BI (**B**usy **I**nput) signal must be pulled-down in order to let the BM1397 communicate.
 
+<!-- cspell:disable-next-line -->
 Communication with BM1397 is done by UART on its CI (**C**command **I**nput) pin and RO (**R**esponse **O**utput). Default baudrate is 115200 bps. UART has 8 bits of data, no parity, 1 stop bit (usually represented as 115200 8N1).
 ## Command
 ![](images/command.svg)
 ### Preamble
-All command have a fixed 2 bytes preamble: 0x55 0xAA
+All commands have a fixed 2 byte preamble: 0x55 0xAA
 ### TYPE
 * TYPE = 1: send Job
 * TYPE = 2: send Command
@@ -349,61 +354,61 @@ if TYPE == 2:
 * CMD = 1: write Register
 * CMD = 2: read Register
 * CMD = 3: chain Inactive
-### Frame Lenght
-Total Frame Lenght excluding preamble.
+### Frame Length
+Total Frame Length excluding preamble.
 ### Data
-Depend on TYPE/CMD, see detailed frames below.
+Depends on TYPE/CMD, see detailed frames below.
 ### CRC
-Can be CRC5 or CRC16 depending on TYPE/CMD, see detailled frames below.
+Can be CRC5 or CRC16 depending on TYPE/CMD, see detailed frames below.
 ## Response
 ![](images/response.svg)
 
-All Responses have fixed lenght : 9 bytes.
+All Responses have fixed length : 9 bytes.
 ### Preamble
-All command have a fixed 2 bytes preamble: 0xAA 0x55
+All commands have a fixed 2 byte preamble: 0xAA 0x55
 ### TYPE
 * TYPE = 0: respond to a command
 * TYPE = 4: respond to a job (nonce)
 ### Data
 Depends on TYPE, see detailed frames below.
 ### CRC5
-CRC 5 bits with polynomial 0x05, intial value 0x1F, no reflection, no final XOR of the full Frame excluding preamble.
+CRC 5 bits with polynomial 0x05, initial value 0x1F, no reflection, no final XOR of the full Frame excluding preamble.
 ## Set Chip Address
-On reset all chip have a logical address of 0. In order to access to a specific chip later, we must give them different address.
+On reset, all chips have a logical address of 0. In order to access to a specific chip later, we must give them different addresses.
 
-Warning : Chip Address are different to Chip index on the chain. IT is a logical concept configurable by software.
+**Warning**: Chip Address is different from chip index on the chain. It is a logical concept configurable by software.
 
-To set Chip Address of all chip one by one, we must not send command to ALL chip, just to the chip with Address = 0, so the first chip on the chain will get the command and not propagate it downward.
+To set Chip Address of all chips one by one, we **must not** send commands to ALL chips, just to the chip with Address = 0, so the first chip on the chain will get the command and not propagate it downward.
 
 The Set Chip Address Command format is:
 
 ![](images/set_chip_address.svg)
 
-No Response is replied by the chip.
+No Response is returned by the chip.
 ## Write Register
 The Write Register Command format is:
 
 ![](images/write_register.svg)
 
-No Response is replied by the chip.
+No Response is returned by the chip.
 ## Read Register
 The Read Register Command format is:
 
 ![](images/read_register.svg)
 
-Sending a Read Register Command to ALL chips on the chain is very usefull to enumerate them (usually with the [Chip Address](#chip-address) register), every chip on the chain will send a Response that will be propagated upward.
+Sending a Read Register Command to ALL chips on the chain is very useful to enumerate them (usually with the [Chip Address](#chip-address) register), every chip on the chain will send a Response that will be propagated upward.
 ## Register Value
 The Register Value Response format is:
 
 ![](images/register_value.svg)
 
-Warning: sometime a Register Value can be sent sponteanously by a chip (usually the [Core Register Value](#core-register-value) register).
+Warning: sometimes a Register Value can be sent spontaneously by a chip (usually the [Core Register Value](#core-register-value) register).
 ## Chain Inactive
 The Chain Inactive Command format is:
 
 ![](images/chain_inactive.svg)
 
-No Response is replied by the chip.
+No Response is returned by the chip.
 ## Send Job
 The Send Job Command format is:
 
@@ -413,19 +418,22 @@ Once hashing, when a nonce is found by a chip on the chain, it is sent on the RO
 
 ![](images/nonce.svg)
 ## Write Core Register
-In order to write value to a Core Register, a [Write Register](#write-register) Command shall be done to the [Core Register Control](#core-register-control) Register with the [RD_WR#](#wr_rd) fields = 1.
+In order to write values to a Core Register, a [Write Register](#write-register) Command shall be done to the [Core Register Control](#core-register-control) Register with the [RD_WR#](#wr_rd) fields = 1.
+
 ## Read Core Register
 In order to read the value of a Core Register, a [Write Register](#write-register) Command shall be done to the [Core Register Control](#core-register-control) Register with the [RD_WR#](#wr_rd) fields = 0.
 
 Then the chip will reply a [Register Value](#register-value) Response for the [Core Register Value](#core-register-value) Register.
+
 ## Enumerate Chips on the Chain
-On original Firmware of the ControlBoard, an enumeration of all chips on the chain (physically on a HashBoard) is done at the begining. It is a [Read Register](#read-register) Command on [Chip Address](#chip-address) Register with [ALL](#all) = 1. Then all chips on the chain reply a [Register Value](#register-value) Response.
+With the original firmware of the control board, an enumeration of all chips on the chain (physically on a hash board) is done at the beginning. It is a [Read Register](#read-register) Command on [Chip Address](#chip-address) Register with [ALL](#all) = 1. Then all chips on the chain reply a [Register Value](#register-value) Response.
 
-During this enumeration, we see that all chips on the chain have a [CHIP_ADDR](#chip-address) = 0. So the FW affect new Chip Address using the [Set Chip Address](#set-chip-address) Command, and sometimes also perform a [Write Regsiter](#write-register) Command to [Chip Address](#chip-address) Register with the wanted [CHIP_ADDR](#chip-address) (seen on S9k original FW).
+During this enumeration, we see that all chips on the chain have a [CHIP_ADDR](#chip-address) = 0. So the FW affects new Chip Address using the [Set Chip Address](#set-chip-address) Command, and sometimes also perform a [Write Register](#write-register) Command to [Chip Address](#chip-address) Register with the wanted [CHIP_ADDR](#chip-address) (seen on S9k original FW).
 
-The [CHIP_ADDR](#chip-address) given don't have to be contiguous on a chain, for instance they are given with increment of 8 on T17 original FW (4 on S9k original FW).
+The [CHIP_ADDR](#chip-address) given don't have to be contiguous on a chain, for instance they are given with increments of 8 on T17 original FW (4 on S9k original FW).
+
 ## Set Baudrate
-In order to get higher HashRate, we need to increase the communication Baudrate because at 115200bps (default baudrate) a [Send Job](#send-job) Command with 4 midstate would take 15.2ms which could be longer than the time the full chain would take to Hash the complete Nonce space of the previous job.
+In order to get a higher hash rate, we need to increase the communication Baudrate because at 115200bps (default baudrate) a [Send Job](#send-job) Command with 4 midstate would take 15.2ms which could be longer than the time the full chain would take to Hash the complete Nonce space of the previous job.
 
 BaudRate = fBase / ((BT8D + 1) * 8)
 
@@ -440,12 +448,12 @@ So the default BaudRate = fCLKI / ((BT8D + 1) * 8) = 115740 bps with reset value
 
 This is possible up to 3.125Mbps BaudRate with [BT8D](#bt8d) = 0.
 
-For higher BaudRate, here are the necessary steps (numeric example below is for 6.25 Mbps BaudRate):
-1. enabling and configuring PLL3 using [PLL3 Parameter](#pll3-parameter) for example writting 0xC0700111 will result of a PLL3 with frequency equal to :
+For higher baud rates, here are the necessary steps (numeric example below is for 6.25 Mbps BaudRate):
+1. enabling and configuring PLL3 using [PLL3 Parameter](#pll3-parameter) for example writing 0xC0700111 will result of a PLL3 with frequency equal to :
 
 fPLL3 = fCLKI * FBDIV / (REFDIV * POSTDIV1 * POSTDIV2) = 25MHz * 112 / (1 * 1 * 1) = 2.8 GHz
 
-2. setting [PLL3_DIV4](#pll3_div4) in [Fast UART Configuration](#fast-uart-configuration) for example writting 0x0600000F give a PLL3_DIV4 = 6
+2. setting [PLL3_DIV4](#pll3_div4) in [Fast UART Configuration](#fast-uart-configuration) for example writing 0x0600000F give a PLL3_DIV4 = 6
 3. setting [BCLK_SEL](#bclk_sel) to 1
 
 fBase = fPLL3 / (PLL3_DIV4 + 1) = 2.8 GHz / (6 + 1) = 400 MHz
