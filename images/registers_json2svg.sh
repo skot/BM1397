@@ -10,7 +10,7 @@ for reg in \
   hash_counting_number \
   ticket_mask \
   misc_control \
-  some_temp_related \
+  i2c_control \
   ordered_clock_enable \
   fast_uart_configuration \
   uart_relay \

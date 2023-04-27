@@ -1,0 +1,10 @@
+[
+  { "name": "I2C_REG_VAL",  "bits": 8, "attr": "RO" },
+  { "name": "I2C_REG_ADDR", "bits": 8 },
+  { "name": "RD#_WR",       "bits": 1, "attr": "RO", "rotate": -45 },
+  { "name": "I2C_ADDR",     "bits": 7 },
+  { "name": "DO_CMD",       "bits": 1, "rotate": -45 },
+  { "name": "SOME_FLAGS",   "bits": 2 },
+  { "name": "Reserved",     "bits": 4, "attr": "RO" },
+  { "name": "BUSY",         "bits": 1 }
+]

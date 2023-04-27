@@ -38,6 +38,8 @@ Address = 0x04
 Reset value = 0x80000000
 
 ![](images/hash_rate.svg)
+### HASHRATE
+Hash rate value in 2^24 unit.
 ## PLL0 Parameter
 Address = 0x08
 
@@ -62,6 +64,15 @@ Address = 0x14
 Reset value = 0x00000000
 
 ![](images/ticket_mask.svg)
+
+The chip will provide only solutions that are <= target based on this difficulty.
+
+TICKET_MASK is bitmask that is used to mask the bits of bytes 0..31 of the reversed SHA hash.
+
+Chip sends the nonce only if
+   `revhash[0..3] == 0 && (revhash[4..7] & reverse_bytes ticket_mask)) == 0`
+
+The weird mask format came about probably because they did comparison on bit-reversed SHA hash, not just byte-reversed SHA hash.
 ## Misc Control
 Address = 0x18
 
@@ -74,14 +85,20 @@ It is a 9bits divider to determine actual Baudrate. It is composed by BT8D_8_5 a
 **B**audrate **CL**oc**K** **SEL**ect
 * BCLK_SEL = 0: Baudrate base clock is CLKI (external clock)
 * BCLK_SEL = 1: Baudrate base clock is PLL3
-## Some Temp Related
+### RFS (RF pin Selector)
+* RFS = 0: Open Drain
+* RFS = 1: SDA0
+### TFS (TF pin Selector)
+* TFS = 0: Hash Doing
+* TFS = 2: UART RX
+* TFS = 4: UART TX
+* TFS = 6: SCL0
+## I2C Control
 Address = 0x1C
 
-Reset value = 0x??
+Reset value = 0x01000000
 
-![](images/some_temp_related.svg)
-
-Reverse engineering on this register is still ongoing.
+![](images/i2c_control.svg)
 ## Ordered Clock Enable
 Address = 0x20
 
@@ -273,6 +290,9 @@ Reset value = 0x00000000
 ID = 0
 
 ![](images/clock_delay_ctrl.svg)
+
+### MMEN (Multi Midstate ENable)
+Enable AsicBoost.
 ## Process Monitor Ctrl
 ID = 1
 
