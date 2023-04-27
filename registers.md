@@ -356,7 +356,7 @@ CRC 5 bits with polynomial 0x05, initial value 0x1F, no reflection, no final XOR
 ## Set Chip Address
 On reset, all chips have a logical address of 0. In order to access to a specific chip later, we must give them different addresses.
 
-**Warning**: Chip *addresses* are different from the chip *index* on the chain. It is a logical concept configurable by software.
+**Warning**: Chip Address is different from chip index on the chain. It is a logical concept configurable by software.
 
 To set Chip Address of all chips one by one, we **must not** send commands to ALL chips, just to the chip with Address = 0, so the first chip on the chain will get the command and not propagate it downward.
 
@@ -370,7 +370,7 @@ The Write Register Command format is:
 
 ![](images/write_register.svg)
 
-No response is returned by the chip.
+No Response is returned by the chip.
 ## Read Register
 The Read Register Command format is:
 
@@ -388,7 +388,7 @@ The Chain Inactive Command format is:
 
 ![](images/chain_inactive.svg)
 
-No response is returned by the chip.
+No Response is returned by the chip.
 ## Send Job
 The Send Job Command format is:
 
@@ -398,10 +398,10 @@ Once hashing, when a nonce is found by a chip on the chain, it is sent on the RO
 
 ![](images/nonce.svg)
 ## Write Core Register
-In order to write values to a the Core Register, a [Write Register](#write-register) Command shall be done to the [Core Register Control](#core-register-control) Register with the [RD_WR#](#wr_rd) fields = 1.
+In order to write values to a Core Register, a [Write Register](#write-register) Command shall be done to the [Core Register Control](#core-register-control) Register with the [RD_WR#](#wr_rd) fields = 1.
 
 ## Read Core Register
-In order to read the value of a Core Register, a [Read Register](#read-register) Command shall be done to the [Core Register Control](#core-register-control) Register with the [RD_WR#](#wr_rd) fields = 0.
+In order to read the value of a Core Register, a [Wtire Register](#write-register) Command shall be done to the [Core Register Control](#core-register-control) Register with the [RD_WR#](#wr_rd) fields = 0.
 
 Then the chip will reply a [Register Value](#register-value) Response for the [Core Register Value](#core-register-value) Register.
 
