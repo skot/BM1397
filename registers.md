@@ -401,7 +401,7 @@ Once hashing, when a nonce is found by a chip on the chain, it is sent on the RO
 In order to write values to a Core Register, a [Write Register](#write-register) Command shall be done to the [Core Register Control](#core-register-control) Register with the [RD_WR#](#wr_rd) fields = 1.
 
 ## Read Core Register
-In order to read the value of a Core Register, a [Wtire Register](#write-register) Command shall be done to the [Core Register Control](#core-register-control) Register with the [RD_WR#](#wr_rd) fields = 0.
+In order to read the value of a Core Register, a [Write Register](#write-register) Command shall be done to the [Core Register Control](#core-register-control) Register with the [RD_WR#](#wr_rd) fields = 0.
 
 Then the chip will reply a [Register Value](#register-value) Response for the [Core Register Value](#core-register-value) Register.
 
