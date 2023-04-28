@@ -32,6 +32,13 @@ Address = 0x00
 Reset value = 0x13971800
 
 ![](images/chip_address.svg)
+
+### CHIP_ID
+On BM1397, CHIP_ID = 0x1397
+### CORE_NUM
+On BM1397, CORE_NUM = 0x18 which should be multiplied by 28, to find the actual Core Number : 672.
+### ADDR
+This is the Chip Address of the particular chip, see [Set Chip Address](#set-chip-address) for details.
 ## Hash Rate
 Address = 0x04
 
@@ -46,6 +53,14 @@ Address = 0x08
 Reset value = 0xC0600161
 
 ![](images/pll_parameter.svg)
+
+PLL0 is used as base clock for hash rate calculation.
+
+PLL0 frequency is calculated with the formula :
+
+fPLL0 = fCLKI * FBDIV / (REFDIV * POSTDIV1 * POSTDIV2)
+
+POSTDIV1 must be greater than or equal to POSTDIV2.
 ## Chip Nonce Offset
 Address = 0x0C
 
@@ -195,18 +210,38 @@ Address = 0x60
 Reset value = 0x00640111
 
 ![](images/pll_parameter.svg)
+
+PLL1 frequency is calculated with the formula :
+
+fPLL1 = fCLKI * FBDIV / (REFDIV * POSTDIV1 * POSTDIV2)
+
+POSTDIV1 must be greater than or equal to POSTDIV2.
 ## PLL2 Parameter
 Address = 0x64
 
 Reset value = 0x00680111
 
 ![](images/pll_parameter.svg)
+
+PLL2 frequency is calculated with the formula :
+
+fPLL2 = fCLKI * FBDIV / (REFDIV * POSTDIV1 * POSTDIV2)
+
+POSTDIV1 must be greater than or equal to POSTDIV2.
 ## PLL3 Parameter
 Address = 0x68
 
 Reset value = 0x00700111
 
 ![](images/pll_parameter.svg)
+
+PLL3 is used as a base clock for baud rate generation with baud rate higher than 3.125 MHz (see [Set Baudrate](#set-baudrate)).
+
+PLL3 frequency is calculated with the formula :
+
+fPLL3 = fCLKI * FBDIV / (REFDIV * POSTDIV1 * POSTDIV2)
+
+POSTDIV1 must be greater than or equal to POSTDIV2.
 ## Ordered Clock Monitor
 Address = 0x6C
 
@@ -428,10 +463,17 @@ Then the chip will reply a [Register Value](#register-value) Response for the [C
 ## Enumerate Chips on the Chain
 With the original firmware of the control board, an enumeration of all chips on the chain (physically on a hash board) is done at the beginning. It is a [Read Register](#read-register) Command on [Chip Address](#chip-address) Register with [ALL](#all) = 1. Then all chips on the chain reply a [Register Value](#register-value) Response.
 
-During this enumeration, we see that all chips on the chain have a [CHIP_ADDR](#chip-address) = 0. So the FW affects new Chip Address using the [Set Chip Address](#set-chip-address) Command, and sometimes also perform a [Write Register](#write-register) Command to [Chip Address](#chip-address) Register with the wanted [CHIP_ADDR](#chip-address) (seen on S9k original FW).
+During this enumeration, we see that all chips on the chain have a [ADDR](#addr) = 0. So the FW affect new Chip Address by first sending a [Chain Inactive](#chain-inactive) Command, so chips stop relaying command to the chain, then using the [Set Chip Address](#set-chip-address) Command which sill be accepted only by the first chip on the chain. Then the next [Set Chip Address](#set-chip-address) Command will be ignored by the first chip and relayed to the second chip on the chain, which will accept this Command and set it's own Chip Address. And so on up to the last chip on the chain.
 
-The [CHIP_ADDR](#chip-address) given don't have to be contiguous on a chain, for instance they are given with increments of 8 on T17 original FW (4 on S9k original FW).
+On S9k (BM1393), FW also perform a [Write Regsiter](#write-register) Command to [Chip Address](#chip-address) Register with the wanted [ADDR](#addr) in addition to the [Set Chip Address](#set-chip-address) Command. I am not sure if it is usefull on BM1393, but on BM1397 the full [Chip Address](#chip-address) Register seems to be Read Only.
 
+The [ADDR](#addr) given don't have to be contiguous on a chain, for instance they are given with increment of 8 on T17 original FW and 4 on S9k original FW. It is used to divide evenly the total nonce space between chips on the chain. Indeed, all chips will add their own [ADDR](#addr) to the Nonce they are hashing.
+
+For instance a T17 hash board has 30 chips on a chain, so with an increment of 8, the last Chip Address will be 232 (actually the FW send 32 [Set Chip Address](#set-chip-address) Command, so the last 2 Commands should be useless).
+
+Same for S9k hash board with physically 60 chip on the chain, FW send 64 [Set Chip Address](#set-chip-address) Command.
+
+This should be the reason why the full 32 bits Nonce space is never fully hashed by miners with chip number on chain not aligned to a power of 2. See [The Mystery Of The Bitcoin Nonce Pattern](https://blog.bitmex.com/the-mystery-of-the-bitcoin-nonce-pattern)
 ## Set Baudrate
 In order to get a higher hash rate, we need to increase the communication Baudrate because at 115200bps (default baudrate) a [Send Job](#send-job) Command with 4 midstate would take 15.2ms which could be longer than the time the full chain would take to Hash the complete Nonce space of the previous job.
 
