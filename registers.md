@@ -333,6 +333,13 @@ Enable AsicBoost.
 ID = 1
 
 ![](images/process_monitor_ctrl.svg)
+### PM_START (Process Monitor START)
+When written to 1 the Core Process Monitor parameter selected with PM_SEL will be read into Process Monitor Data.
+### PM_SEL (Process Monitor SELect)
+* PM_SEL=0 : LVT delay chain
+* PM_SEL=1 : SVT delay chain
+* PM_SEL=2 : HVT delay chain
+* PM_SEL=3 : Critical path chain
 ## Process Monitor Data
 ID = 2
 
