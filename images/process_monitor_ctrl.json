@@ -1,5 +1,5 @@
 [
   { "name": "PM_SEL",   "bits": 2 },
   { "name": "PM_START", "bits": 1 },
-  {                     "bits": 13 }
+  {                     "bits": 5 }
 ]

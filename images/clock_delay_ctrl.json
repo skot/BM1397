@@ -4,6 +4,5 @@
   { "name": "MMEN",       "bits": 1 },
   { "name": "HASH_CLKEN", "bits": 1 },
   { "name": "PWTH_SEL",   "bits": 2 },
-  { "name": "CCDLY_SEL",  "bits": 2 },
-  {                       "bits": 8 }
+  { "name": "CCDLY_SEL",  "bits": 2 }
 ]

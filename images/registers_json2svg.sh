@@ -50,5 +50,5 @@ for core_reg in \
   sweep_clock_control
 do
   echo $core_reg
-  bit_field --bits 16 --lanes 2 $core_reg.json | sed -e 's/viewbox="0 0 800 160"/viewbox="0 0 800 160" style="background-color:white"/g' > $core_reg.svg
+  bit_field --bits 8 $core_reg.json | sed -e 's/viewbox="0 0 800 80"/viewbox="0 0 800 80" style="background-color:white"/g' > $core_reg.svg
 done

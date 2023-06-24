@@ -1,4 +1,6 @@
 [
-  { "name": "CORE_REG_VAL", "bits": 16 },
-  { "name": "CORE_ID",      "bits": 16 }
+  { "name": "CORE_REG_VAL", "bits": 8 },
+  { "name": "FOUND",        "bits": 8 },
+  { "name": "CORE_ID",      "bits": 9 },
+  {                         "bits": 7 }
 ]

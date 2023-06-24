@@ -1,5 +1,5 @@
 [
   { "name": "CMD_ERR_CNT",   "bits": 4 },
   { "name": "INI_NONCE_ERR", "bits": 1 },
-  {                          "bits": 11 }
+  {                          "bits": 3 }
 ]

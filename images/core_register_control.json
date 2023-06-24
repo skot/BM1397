@@ -1,9 +1,9 @@
 [
   { "name": "CORE_REG_VAL",  "bits": 8 },
   { "name": "CORE_REG_ID",   "bits": 4 },
-  { "name": "Always3?",      "bits": 3 },
-  { "name": "WR_RD#",        "bits": 1, "rotate": -45 },
-  { "name": "CORE_ID",       "bits": 8 },
-  { "name": "Always0x7e?",   "bits": 7 },
-  { "name": "WR_RD#",        "bits": 1, "rotate": -45 }
+  {                          "bits": 3 },
+  { "name": "RD#_WR",        "bits": 1, "rotate": -45 },
+  { "name": "CORE_ID",       "bits": 9 },
+  {                          "bits": 6 },
+  { "name": "DO_CMD",        "bits": 1, "rotate": -45 }
 ]
