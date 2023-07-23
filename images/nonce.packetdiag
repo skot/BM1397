@@ -2,8 +2,9 @@ packetdiag {
   0-7: 0x00;
   8-15: 0x55;
   16-31: Nonce [colheight = 2];
-  48-55: Midstate;
-  56-63: Job ID;
-  64-66: 0;
+  48-55: ???;
+  56-63: Job ID + Midstate ID;
+  64-64: 1;
+  65-66: 0;
   67-71: CRC5;
 }
