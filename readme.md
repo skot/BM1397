@@ -69,8 +69,8 @@ Really don’t know what this table means, but it mentions a lot of variants of 
 
 ### Modes
 
-## Register Map
-- [BM1397 Register Map](https://github.com/skot/BM1397/blob/master/registers.md)
+## Programing Manual
+- [BM1397](bm1397.md)
 
 ### Initializing
 
