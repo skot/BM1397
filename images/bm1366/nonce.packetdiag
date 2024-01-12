@@ -1,0 +1,11 @@
+packetdiag {
+  0-7: 0xAA;
+  8-15: 0x55;
+  16-31: Nonce [colheight = 2];
+  48-55: ???;
+  56-63: Job ID + Midstate ID;
+  64-79: Version Bits;
+  80-80: 1;
+  81-82: 0;
+  83-87: CRC5;
+}

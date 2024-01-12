@@ -71,6 +71,7 @@ Really don’t know what this table means, but it mentions a lot of variants of 
 
 ## Programing Manual
 - [BM1397](bm1397.md)
+- [BM1366](bm1366.md)
 
 ### Initializing
 

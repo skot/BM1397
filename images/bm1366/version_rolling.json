@@ -1,0 +1,8 @@
+[
+  { "name": "VERSION_MASK", "bits": 16 },
+  {                         "bits": 12 },
+  { "name": "1",            "bits":  1 },
+  { "name": "0",            "bits":  1 },
+  { "name": "0",            "bits":  1 },
+  { "name": "MID_AUTO_GEN", "bits":  1, "rotate": -45 }
+]

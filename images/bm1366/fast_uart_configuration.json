@@ -1,0 +1,13 @@
+[
+  { "name": "CLKO_DIV",    "bits": 8, "type": 5 },
+  { "name": "BT8D",        "bits": 8, "type": 4 },
+  { "name": "?",           "bits": 4, "type": 4 },
+  { "name": "PLL1_DIV4",   "bits": 4, "type": 4 },
+  { "name": "?",           "bits": 1, "type": 4 },
+  {                        "bits": 1 },
+  { "name": "BCLK_SEL",    "bits": 2, "type": 4 },
+  { "name": "EN?",         "bits": 1, "type": 4 },
+  { "name": "?",           "bits": 1, "type": 4 },
+  { "name": "?",           "bits": 1, "type": 4 },
+  { "name": "?",           "bits": 1, "type": 4 }
+]

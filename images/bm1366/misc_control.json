@@ -1,0 +1,19 @@
+[
+  { "name": "HASHRATE_TWS",      "bits": 2, "type": 5, "rotate": -25 },
+  { "name": "?",                 "bits": 1, "type": 4 },
+  { "name": "?",                 "bits": 1, "type": 4 },
+  { "name": "TFS",               "bits": 3, "type": 5 },
+  { "name": "RET_WORK_ERR_FLAG", "bits": 1, "type": 7, "rotate": -45 },
+  {                              "bits": 5 },
+  { "name": "INV_CLKO",          "bits": 1, "type": 5, "rotate": -45 },
+  { "name": "RFS",               "bits": 1, "type": 5 },
+  { "name": "RET_ERR_NONCE",     "bits": 1, "type": 7, "rotate": -45 },
+  { "name": "REG_A8_RELATED",    "bits": 4, "type": 4},
+  { "name": "RVS_K0",            "bits": 1, "type": 5, "rotate": -45 },
+  { "name": "SPAT_NOD",          "bits": 1, "type": 5, "rotate": -45 },
+  { "name": "CORE_SRST",         "bits": 1, "type": 5, "rotate": -45 },
+  {                              "bits": 1 },
+  { "name": "??",                "bits": 2, "type": 4 },
+  {                              "bits": 2 },
+  { "name": "CORE_RETURN_NONCE", "bits": 4, "type": 4 }
+]
